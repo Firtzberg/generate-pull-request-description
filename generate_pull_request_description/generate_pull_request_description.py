@@ -199,13 +199,13 @@ class PullRequestDescriptionGenerator:
         :return list(str):
         """
         return (
-            subprocess.run(["git", "log", "--pretty=format:%h|§%s|§%b|§%d@@@"], capture_output=True)
+            subprocess.run(["git", "log", "--pretty=format:'%h|§%s|§%b|§%d@@@'"], capture_output=True)
             .stdout.strip()
             .decode()
         ).split("@@@")
 
     def _parse_commit_messages_from_git_log(self):
-        """Parse commit messages from the git log (formatted using `--pretty=format:%h|§%s|§%b|§%d@@@`) until the stop
+        """Parse commit messages from the git log (formatted using `--pretty=format:'%h|§%s|§%b|§%d@@@'`) until the stop
         point is reached. The parsed commit messages are returned separately to any that fail to parse.
 
         :return list(tuple), list(str):
